@@ -28,8 +28,7 @@ class TitleScene extends Phaser.Scene {
   }
   create() {
     document.getElementById("90pxadstyle").innerHTML = `
-    #swordbattle-io_970x90 > div > iframe,
-      #swordbattle-io_970x90 > iframe {
+    #swordbattle-io_970x90 > iframe {
   bottom: 100px;
           left: 50%;
   transform: translateX(-50%);
@@ -278,7 +277,6 @@ class TitleScene extends Phaser.Scene {
         this.done = true;
         if (access) window.localStorage.setItem("oldName", name.value);
         var myName = name.value;
-        console.log(this.playPreroll ? "preroll" : "no preroll");
 
         if (this.playPreroll) {
           if (typeof aiptag.adplayer !== "undefined") {
@@ -306,11 +304,10 @@ class TitleScene extends Phaser.Scene {
                   document.getElementById("game").focus();
                   this.callback(myName, this.music, this.secret);
 document.getElementById("90pxadstyle").innerHTML = `
-#swordbattle-io_970x90 > div > iframe,
-#swordbattle-io_970x90 > iframe {
-bottom: 0px;
-    left: 50%;
-transform: translateX(-50%);
+    #swordbattle-io_970x90 > iframe {
+  bottom: 0px;
+          left: 50%;
+  transform: translateX(-50%);
 }`
                   document.getElementById("swordbattle-io_970x250").style.display = "none";
                   document.getElementById("swordbattle-io_970x90").style.display = "none";
@@ -328,12 +325,11 @@ transform: translateX(-50%);
             this.nameBox.destroy();
 
             document.getElementById("90pxadstyle").innerHTML = `
-            #swordbattle-io_970x90 > div > iframe,
-            #swordbattle-io_970x90 > iframe {
-        bottom: 0px;
-                left: 50%;
-        transform: translateX(-50%);
-      }`
+    #swordbattle-io_970x90 > iframe {
+  bottom: 0px;
+          left: 50%;
+  transform: translateX(-50%);
+}`
             this.callback(myName, this.music, this.secret);
                   document.getElementById("swordbattle-io_970x90").style.display = "none";
 
@@ -345,12 +341,11 @@ transform: translateX(-50%);
 
           this.nameBox.destroy();
           document.getElementById("90pxadstyle").innerHTML = `
-          #swordbattle-io_970x90 > div > iframe,
-          #swordbattle-io_970x90 > iframe {
-      bottom: 0px;
-              left: 50%;
-      transform: translateX(-50%);
-    }`
+    #swordbattle-io_970x90 > iframe {
+  bottom: 0px;
+          left: 50%;
+  transform: translateX(-50%);
+}`
           this.callback(myName, this.music, this.secret);
                   document.getElementById("swordbattle-io_970x90").style.display = "none";
 
@@ -519,8 +514,6 @@ transform: translateX(-50%);
 
     };
 this.shopLoading = false;
-document.getElementById("shopFrame").style.display = "none";
-
     this.shopBtn = new ImgButton(this, 10, 10, "shopBtn", () => {
       if(this.shopLoading) return;
       if(this.nameBox.getChildByName("btn").innerHTML == "Connecting..") return;
@@ -845,44 +838,41 @@ document.getElementById("shopFrame").style.display = "none";
     var footery = this.canvas.height - (this.footer.height);
     if (this.canvas.height < 384) footery = this.canvas.height - (this.footer.height / 2);
 
-
     if (this.footerdone && this.footer.y != footery) this.footer.y = footery;
-    if((this.canvas.height - (this.nameBox.y+this.nameBox.height) <=300) || (this.login && this.login.visible) || (this.signup && this.signup.visible) || (this.settings && this.settings.visible) || (document.getElementById("shopFrame").style.display != "none")){
-      // hide ads
-      document.getElementById("swordbattle-io_970x250").style.display = "none";
-      document.getElementById("swordbattle-io_970x90").style.display = "none";
-    } else {
 
-    if((!this.promo || !this.promo.visible) && (Date.now() - this.lastAdRef > 4000) && (this.canvas.height - (this.nameBox.y+this.nameBox.height) > 460)) {
+
+    if((!this.promo || !this.promo.visible) && (Date.now() - this.lastAdRef > 5000) && (this.canvas.height - (this.nameBox.y+this.nameBox.height) > 460)) {
+      console.log((this.canvas.height - (this.nameBox.y+this.nameBox.height) > 460), (this.canvas.height - (this.nameBox.y+this.nameBox.height)));
       this.lastAdRef = Date.now();
       try {
         console.log("adding ad");
         document.getElementById("swordbattle-io_970x250").style.display = "";
       document.getElementById("swordbattle-io_970x90").style.display = "none";
 
-      // if(!location.hostname.includes("swordbattle.io")){
+      if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x250'); });
-// }
+}
       } catch(e) {
 
       }
-    } else if((!this.promo || !this.promo.visible) && (Date.now() - this.lastAdRef > 4000) && (this.canvas.height - (this.nameBox.y+this.nameBox.height) > 300)) {
+    } else if((!this.promo || !this.promo.visible) && (Date.now() - this.lastAdRef > 5000) && (this.canvas.height - (this.nameBox.y+this.nameBox.height) > 160)) {
       // hide other ads
       try {
       document.getElementById("swordbattle-io_970x250").style.display = "none";
       document.getElementById("swordbattle-io_970x90").style.display = "";
-      // if(!location.hostname.includes("swordbattle.io")){
+      if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x90'); });
-// }
+}
       } catch(e) {
 
       }
 
 
+    } else if((this.canvas.height - (this.nameBox.y+this.nameBox.height) <=160) || (this.login && this.login.visible) || (this.signup && this.signup.visible) || (this.settings && this.settings.visible)){
+      // remove the ad
+      document.getElementById("swordbattle-io_970x250").style.display = "none";
+      document.getElementById("swordbattle-io_970x90").style.display = "none";
     }
-  }
-
-
 
   }
 }

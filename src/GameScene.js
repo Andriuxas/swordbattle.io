@@ -43,14 +43,6 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create() {
-
-			try {
-				document.getElementById("swordbattle-io_970x250").style.display = "none";
-				document.getElementById("swordbattle-io_970x90").style.display = "none";
-			} catch(e) {
-				console.log(e);
-			}
-
 		var map = 15000;
 		this.failedLoads = [];
 		this.countries = {};
@@ -474,16 +466,16 @@ class GameScene extends Phaser.Scene {
 
                 try {
 
-                  // if(!location.hostname.includes("swordbattle.io")){
+                  if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x90'); });
-// }
+}
 
                 document.getElementById("swordbattle-io_970x90").style.display = "";
                  this.refreshInt = setInterval(() => {
 
-                  // if(!location.hostname.includes("swordbattle.io")){
+                  if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x90'); });
-// }
+}
 
                 }, 4000);
                 } catch(e) {
@@ -679,11 +671,7 @@ aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x9
 										} catch(e) {
 											console.log(e);
 										}
-										try {
 										this.flyingSwordsData.delete(sword.id);
-										} catch(e) {
-											console.log(e);
-										}
 									}
 											var ability = false;
 											if(this.myObj && sword.id == this.myObj.id && this.myObj.abilityActive) ability = true;
@@ -699,17 +687,10 @@ aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x9
 											this.UICam.ignore(newSword);
 											this.flyingSwordsData.set(sword.id, newSword);
 
-											setTimeout(()=>{
-												try {
-												newSword.destroy();
-												}  catch(e) {
-													console.log(e);
-												}
-											}, 5000);
 											this.tweens.addCounter({
 												from: 0,
 												to: 500,
-												duration: 4000,
+												duration: 5000,
 												ease: "Linear",
 												onUpdate:  (tween)=>{
 													var value = tween.getValue();
@@ -728,8 +709,8 @@ aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x9
 													if(!this.flyingSwords.get(id)) return;
 													if(!this.flyingSwordsData.get(id)) return;
 
-													var newX = x + (value*18 * Math.cos(angle * Math.PI / 180));
-													var newY = y + (value*18 * Math.sin(angle * Math.PI / 180));
+													var newX = x + (value*25 * Math.cos(angle * Math.PI / 180));
+													var newY = y + (value*25 * Math.sin(angle * Math.PI / 180));
 
 													obj.x = newX;
 													obj.y = newY;
@@ -1823,18 +1804,18 @@ aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x9
 								this.dataText = this.add.text(this.canvas.width/2, this.deadText.y, msg, {fontFamily: "Arial", fontSize: "32px", color: "#000000"}).setOrigin(0.5);
 								this.dataText.setFontSize(Math.min(this.canvas.width/40, this.canvas.height/30));
                 try {
-                  // if(!location.hostname.includes("swordbattle.io")){
+                  if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x90'); });
-// }
+}
 
 
 
                 document.getElementById("swordbattle-io_970x90").style.display = "";
                 this.refreshInt = setInterval(() => {
 
-                  // if(!location.hostname.includes("swordbattle.io")){
+                  if(!location.hostname.includes("swordbattle.io")){
 aiptag.cmd.display.push(function() { aipDisplayTag.display('swordbattle-io_970x90'); });
-// }
+}
 
                 }, 4000);
                 } catch(e) {
@@ -2299,15 +2280,6 @@ this.lastCountriesClear = Date.now();
 			if(!this.spectating)	this.playerCount.setText("Players: " + (this.all.players.length+1).toString() + (this.canvas.height<550 ? "" : "\nFPS: " + Math.round(this.sys.game.loop.actualFps)+"\nTPS: "+this.tps+"\nPing: "+this.ping+" ms"));
 		} catch(e) {
 			console.log(e);
-		}
-		if(!this.spectating) {
-			try {
-				document.getElementById("swordbattle-io_970x250").style.display = "none";
-				document.getElementById("swordbattle-io_970x90").style.display = "none";
-			} catch(e) {
-				console.log(e);
-			}
-
 		}
 
 		if(!this.myObj) return;

@@ -75,6 +75,7 @@ var lastAd = 0;
   var lastAd = 0;
 } else {
   var lastAd = Number(window.localStorage.getItem("lastAd"));
+    playPreroll = true;
 }
 //alert(lastAd)
 var scale = "scale(1)";
@@ -82,7 +83,7 @@ document.body.style.webkitTransform =       // Chrome, Opera, Safari
  document.body.style.msTransform =          // IE 9
  document.body.style.transform = scale;     // General
 
-var adDelay = 180000;
+var adDelay = 360000;
 var gameScene = new GameScene((data) => {
     titleScene.playPreroll = (Date.now() - lastAd > adDelay);
 });
